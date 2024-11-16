@@ -1,0 +1,76 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\BuildingBlocks\Framework.Core\Framework.Core.csproj" />
+      <ProjectReference Include="..\BuildingBlocks\Framework.WebApi.Core\Framework.WebApi.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Application\Events\" />
+      <Folder Include="Application\IntegrationServices\" />
+      <Folder Include="Domain\Rules\" />
+      <Folder Include="Migrations\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+      <Content Include="Infra\Data\.DS_Store" />
+      <Content Remove="Application\Commands\Sell\**" />
+      <Content Remove="Infra\Migrations\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Application\Commands\Sell\**" />
+      <Compile Remove="Domain\DomainEvents\StockResultTransactionCreatedEvent.cs" />
+      <Compile Remove="Domain\DomainEvents\StockResultTransactionDecreasedEvent.cs" />
+      <Compile Remove="Domain\DomainEvents\TransactionCreatedEvent.cs" />
+      <Compile Remove="Domain\DomainEvents\TransactionPurchasedEvent.cs" />
+      <Compile Remove="Domain\DomainEvents\TransactionSoldEvent.cs" />
+      <Compile Remove="Domain\DomainEvents\TransactionStockConfirmedEvent.cs" />
+      <Compile Remove="Domain\Models\Entities\StockResultTransaction.cs" />
+      <Compile Remove="Domain\Models\Entities\TransactionStock.cs" />
+      <Compile Remove="Infra\Migrations\**" />
+      <Compile Remove="Infra\Data\Mappings\StockResultTransactionMapping.cs" />
+      <Compile Remove="Infra\Data\Mappings\TransactionStockMapping.cs" />
+      <Compile Remove="Infra\Data\Repository\StockResultTransactionRepository.cs" />
+      <Compile Remove="Domain\Rules\StockExistsRule.cs" />
+      <Compile Remove="Application\Events\TransactionPurchaseRequestedEventHandler.cs" />
+      <Compile Remove="Application\Events\TransactionSoldRequestedEventHandler.cs" />
+      <Compile Remove="Application\IntegrationServices\Stock_StockDecreasedIntegrationHandle.cs" />
+      <Compile Remove="Migrations\20241110172538_AddCreateAndUpdateData.cs" />
+      <Compile Remove="Migrations\20241110172538_AddCreateAndUpdateData.Designer.cs" />
+      <Compile Remove="Migrations\20241115213854_newDataBase.cs" />
+      <Compile Remove="Migrations\20241115213854_newDataBase.Designer.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Application\Commands\Sell\**" />
+      <EmbeddedResource Remove="Infra\Migrations\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Application\Commands\Sell\**" />
+      <None Remove="Infra\Migrations\**" />
+    </ItemGroup>
+
+</Project>
